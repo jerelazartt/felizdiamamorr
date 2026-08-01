@@ -142,12 +142,10 @@ if (addReasonBtn) {
 /* ============ LIGHTBOX DE FOTOS ============ */
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightboxImg');
-const lightboxCaption = document.getElementById('lightboxCaption');
 const lightboxClose = document.getElementById('lightboxClose');
 
-function openLightbox(src, caption) {
+function openLightbox(src) {
   lightboxImg.src = src;
-  lightboxCaption.textContent = caption || 'Te amo 💖';
   lightbox.classList.add('open');
   lightbox.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
@@ -185,9 +183,9 @@ if (lightbox) {
   });
 }
 
-function makeClickable(card, src, caption) {
+function makeClickable(card, src) {
   card.style.cursor = 'zoom-in';
-  card.addEventListener('click', () => openLightbox(src, caption));
+  card.addEventListener('click', () => openLightbox(src));
 }
 
 /* ============ FOTOS PERSONALES ============ */
@@ -207,32 +205,18 @@ function makeClickable(card, src, caption) {
       '</svg>'
     );
 
-  grid.querySelectorAll('.moment-card-placeholder').forEach((card, i) => {
-    const captions = [
-      'Ese día que nos hicimos fotos 📸',
-      'Nuestro primer viaje juntos ✈️',
-      'Cada vez que nos vemos, siempre 🥰'
-    ];
-    makeClickable(card, heartSvg, captions[i] || 'Te amo 💖');
+  grid.querySelectorAll('.moment-card-placeholder').forEach((card) => {
+    makeClickable(card, heartSvg);
   });
 
-  const captions = [
-    'Ese día que nos hicimos fotos 📸',
-    'Nuestro primer viaje juntos ✈️',
-    'Cada vez que nos vemos, siempre 🥰',
-    'Nuestra historia 💕',
-    'Tú y yo contra el mundo 🌍',
-    'Mi lugar favorito 🌷'
-  ];
-
   let added = 0;
-  imgs.forEach((src, idx) => {
+  imgs.forEach((src) => {
     const img = new Image();
     img.onload = () => {
       const card = document.createElement('div');
       card.className = 'moment-card fade-in';
       card.innerHTML = '<img src="' + src + '" alt="Momento nuestro" class="moment-img-real">';
-      makeClickable(card, src, captions[idx % captions.length]);
+      makeClickable(card, src);
       grid.appendChild(card);
       requestAnimationFrame(() => card.classList.add('visible'));
       added++;

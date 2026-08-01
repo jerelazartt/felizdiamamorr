@@ -650,14 +650,6 @@ footer {
   cursor: pointer;
 }
 
-.lightbox-caption {
-  margin-top: 1rem;
-  color: var(--rosa-claro);
-  font-weight: 300;
-  font-size: 1rem;
-  letter-spacing: 0.5px;
-}
-
 /* ============ EXPLOSION DE CORAZONES ============ */
 .burst-heart {
   position: fixed;
